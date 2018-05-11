@@ -67,17 +67,38 @@ exports.user_login = (req, res, next) => {
             },
             process.env.JWT_KEY,
             {
-              expiresIn: "1h"
+              expiresIn: "7d"
             }
           );
           return res.status(200).json({
             message: "Auth successful",
+            userId: user[0]._id,
             token: token
           });
         }
         res.status(401).json({
           message: "Auth failed"
         });
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+};
+
+exports.user_reset_password = (req, res, next) => {
+  const id = req.params.userId;
+  const updatePass = {};
+  var hash = bcrypt.hashSync(req.body.password, 10);
+  updatePass["password"] = hash;
+  User.update({ _id: id }, { $set: updatePass })
+  .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Password updated"
       });
     })
     .catch(err => {
