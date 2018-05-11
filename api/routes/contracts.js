@@ -9,4 +9,6 @@ router.get("/:userId", checkAuth, ContractsController.contracts_get_user_all);
 
 router.post("/:userId", checkAuth, ContractsController.contracts_create_contract);
 
+router.patch("/:contractId", checkAuth, ContractsController.contracts_update_contract);
+
 module.exports = router;

@@ -70,3 +70,24 @@ exports.contracts_create_contract = (req, res, next) => {
       });
     });
 };
+
+exports.contracts_update_contract = (req, res, next) => {
+  const id = req.params.contractId;
+  const updateOps = {};
+  for (const ops of req.body) {
+    updateOps[ops.propName] = ops.value;
+  }
+  Contract.update({ _id: id }, { $set: updateOps })
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Contract updated"
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+};
