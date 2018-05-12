@@ -87,3 +87,20 @@ exports.binary_update_type = (req, res, next) => {
       });
     });
 };
+
+exports.binary_delete_type = (req, res, next) => {
+  const type = req.params.binaryType;
+  Binary.remove({ type: type })
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Binary with type " + type + " deleted",
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+};

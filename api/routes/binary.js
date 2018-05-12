@@ -11,4 +11,6 @@ router.post("/", checkAuth, BinaryController.binary_create);
 
 router.patch("/:binaryType", checkAuth, BinaryController.binary_update_type);
 
+router.delete("/:binaryType", checkAuth, BinaryController.binary_delete_type);
+
 module.exports = router;
