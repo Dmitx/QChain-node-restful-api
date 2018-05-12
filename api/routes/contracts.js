@@ -11,4 +11,6 @@ router.post("/:userId", checkAuth, ContractsController.contracts_create_contract
 
 router.patch("/:contractId", checkAuth, ContractsController.contracts_update_contract);
 
+router.delete("/:contractId", checkAuth, ContractsController.contracts_delete_contract);
+
 module.exports = router;
