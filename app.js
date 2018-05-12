@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const contractRoutes = require("./api/routes/contracts");
-const walletRoutes = require("./api/routes/wallets");
+const binaryRoutes = require("./api/routes/binary");
 const userRoutes = require("./api/routes/user");
 
 mongoose.connect(
@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 app.use("/contracts", contractRoutes);
-app.use("/wallets", walletRoutes);
+app.use("/binary", binaryRoutes);
 app.use("/user", userRoutes);
 
 app.use((req, res, next) => {
