@@ -68,6 +68,11 @@ exports.binary_update_type = (req, res, next) => {
   for (const ops of req.body) {
     updateOps[ops.propName] = ops.value;
   }
+  if ("type" in updateOps) {
+    return res.status(409).json({
+      message: "Binary type is immutable"
+    });
+  }
   Binary.update({ type: type }, { $set: updateOps })
     .exec()
     .then(result => {
